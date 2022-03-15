@@ -1,0 +1,26 @@
+<%= form_for @product do |form| %>
+
+  <%= form.label :category %> 
+  <%= collection_select(:product, :category_id, Category.all, :id, :title, {:prompt => true, :multiple=>true })%><br/><br/>
+	<%= form.label :title %>
+	<%= form.text_field :title %><br/><br/>
+
+	<%= form.label :price %>
+	<%= form.number_field :price %><br/><br/>
+
+	<%= form.label :description %> 
+	<%= form.text_area :description %><br/><br/>
+
+	<%= form.label :"In Stock" %> 
+	<%= form.number_field :in_stock %><br/><br/>
+
+	<%= form.label :"Cod Eligible "%> 
+	<%= form.label :radio, "Yes"%>
+  <%= form.radio_button(:cod_eligible, "true")%> 
+
+  <%= form.label :radio, "No"%>
+  <%= form.radio_button(:cod_eligible, "false")%>
+
+  <br/><br/>
+  <%= form.submit "Submit" %> 
+<% end %>

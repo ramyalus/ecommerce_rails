@@ -1,0 +1,19 @@
+<h2><%= @category.title.capitalize %></h2>
+<b>Description:</b> <%= @category.description.capitalize %><br/><br/>
+
+<% if user_signed_in? && current_user.is_admin %>
+	<%= link_to "Edit", edit_category_path(@category.id) %>
+	<%= link_to "Delete", category_path(@category.id), method: :delete, data: {confirm: "are you sure??"} %>
+<%end%>
+<br/><br/>
+
+<% if @products.length > 0 %>
+  <%@products.each do |product|%>
+    <%= link_to product.title.capitalize, product_path(product.id) %>
+  <%end%>
+<% else%>
+  <h3> No products found!!!</h3>
+<%end%>
+
+<br/><br/>
+<%= link_to "Back", :back %>

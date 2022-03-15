@@ -1,0 +1,23 @@
+<h2> <%= @product.title.capitalize %> <%= @product.code %> </h2>
+<br/><br/>
+<% if user_signed_in? && current_user.is_admin %>
+<%= link_to "Edit", edit_product_path(@product.id) %> | <%= link_to "Delete", product_path(@product.id), method: :delete, data: {confirm: "are you sure??"}%> <br/><br/>
+<% end %>
+<b>Title:</b> <%= @product.title.capitalize %><br/><br/>
+<b>Price:</b> <%= @product.price %><br/><br/>
+<b>Description:</b> <%= @product.description.capitalize %><br/><br/>
+<b>In Stock:</b> <%= @product.in_stock %><br/><br/>
+<b>Cod Eligible:</b> <%= @product.cod_eligible %><br/><br/>
+<b>Category:</b> <%= @product.category_id %> <br/><br/>
+
+<h3> Add to cart </h3>
+
+<%= form_for @cart_item do |form| %>
+	<%= form.hidden_field :product_id, value: @product.id%>
+	<%= form.hidden_field :user_id,  value: current_user.id %>
+	<%= form.label :quantity %>
+	<%= form.number_field :quantity %>
+	<%= form.submit "Add to cart" %>
+<%end%>
+
+<%= link_to "Back", :back %>

@@ -1,0 +1,46 @@
+<h1> Cart Items - <%= @cart_items.length %></h1>
+
+
+<% if @cart_items.empty? %>
+	<b> No products in your cart. Shop <%= link_to "here", products_path %> </b>
+<%else%>
+<%total_price = 0%>
+<table border= "1">
+	<thead>
+	<tr>
+		<th>#</th>
+		<th>Name</th>
+		<th>Quantity</th>
+		<th>Actual price</th>
+		<th>Total Price</th>
+		<th colspan="2">Action</th>
+	</tr>		
+	</thead>
+	<tbody>
+		<% @cart_items.each do |cart_item| %>
+			<tr>
+				<td><%= cart_item.id%></td>
+				<%product = Product.find cart_item.product_id%>
+				<td><%= product.title %> </td> 
+				<td><%= cart_item.quantity %></td>
+				<td><%= product.price%></td> 
+				<%price = cart_item.quantity * product.price%>
+				<td><%= price%></td>
+				<% total_price += price%>
+				<td> <button type="button">+</button> <%#= cart.quantity%> <button type="button">-</button>
+        <%= link_to "remove",cart_line_item_path(cart_item.id), method: :delete, data: {confirm: "Are you sure want to remove product from cart??? "} %>
+				</td>
+			</tr>
+		<%end%>				
+	</tbody>
+</table>
+
+<h3>Total : <%= total_price%></h3>
+
+<%= form_for @order do |f| %>
+	<%= f.submit "Checkout" %>
+<%end%>
+
+<br/><br/>
+<%= link_to "Continue Shopping", products_path %>
+<% end %>

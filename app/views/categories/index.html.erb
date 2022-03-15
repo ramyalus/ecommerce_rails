@@ -1,0 +1,23 @@
+<h1>Listing Categories - <%= @categories.length %></h1>
+<% if user_signed_in? && current_user.is_admin %>
+  <%= link_to "Add Category", new_category_path %>
+<%end%>
+<br/><br/>
+
+<table border = 1>
+  <thead>
+    <tr>
+      <th>Title</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= link_to category.title.capitalize, category_path(category.id) %></td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
+
+<br/><br/>
+<%= link_to "Back", :back %>
