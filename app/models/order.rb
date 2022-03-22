@@ -3,6 +3,7 @@ class Order < ActiveRecord::Base
 	before_validation  :assign_initial_values
 	after_create :copy_cart_line_items_to_order_line_items
  	after_create :empty_user_cart_line_items
+ 	after_create :send_order_confirmation
 	has_many :order_line_items
 	belongs_to :user
 
@@ -35,6 +36,11 @@ class Order < ActiveRecord::Base
 		cart_line_items.each do |cart_line_item|
 			cart_line_item.destroy
 		end
+	end
+
+
+	def send_order_confirmation
+		Notification.order_confirmation(self).deliver!	
 	end
 end
 

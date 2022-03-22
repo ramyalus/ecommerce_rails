@@ -1,5 +1,7 @@
 class Product < ActiveRecord::Base
 
+	mount_uploader :avatar, AvatarUploader
+
 	before_save  :generate_code 
 
 	belongs_to :category
@@ -13,7 +15,7 @@ class Product < ActiveRecord::Base
 	private 
 
 	def generate_code
-		self.code = "DCT-#{SecureRandom.hex[0..8]}"
+		self.code = "DCT-#{SecureRandom.hex[0..4]}"
 	end
 
 

@@ -19,7 +19,10 @@
   <%= form.radio_button(:cod_eligible, "true")%> 
 
   <%= form.label :radio, "No"%>
-  <%= form.radio_button(:cod_eligible, "false")%>
+  <%= form.radio_button(:cod_eligible, "false")%><br/><br/>
+
+  <%= form.label :avatar %>
+  <%= form.file_field :avatar %>
 
   <br/><br/>
   <%= form.submit "Submit" %> 

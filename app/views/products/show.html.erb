@@ -1,8 +1,9 @@
-<h2> <%= @product.title.capitalize %> <%= @product.code %> </h2>
+<h2> <%= @product.title.capitalize %> - <%= @product.code %> </h2>
 <br/><br/>
 <% if user_signed_in? && current_user.is_admin %>
 <%= link_to "Edit", edit_product_path(@product.id) %> | <%= link_to "Delete", product_path(@product.id), method: :delete, data: {confirm: "are you sure??"}%> <br/><br/>
 <% end %>
+<%= image_tag(@product.avatar.url, style: 'height:100px;width:auto;') if @product.avatar %><br/><br/>
 <b>Title:</b> <%= @product.title.capitalize %><br/><br/>
 <b>Price:</b> <%= @product.price %><br/><br/>
 <b>Description:</b> <%= @product.description.capitalize %><br/><br/>
